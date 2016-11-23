@@ -15,14 +15,16 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 static const char *hello_str = "Hello World!\n";
-static const char *hello_path = "/hello";
+//static const char *hello_path = "/home/dmjoshy/hmm/h";
+static const char *hello_path = "/a";
 
 static int hello_getattr(const char *path, struct stat *stbuf)
 {
 	int res = 0;
-
+ 	printf("Hello from getattr");
 	memset(stbuf, 0, sizeof(struct stat));
 	if (strcmp(path, "/") == 0) {
 		stbuf->st_mode = S_IFDIR | 0755;
@@ -42,7 +44,7 @@ static int hello_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 {
 	(void) offset;
 	(void) fi;
-
+	printf("Hello from readdir");
 	if (strcmp(path, "/") != 0)
 		return -ENOENT;
 
@@ -55,6 +57,7 @@ static int hello_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 
 static int hello_open(const char *path, struct fuse_file_info *fi)
 {
+	printf("Hello from open");
 	if (strcmp(path, hello_path) != 0)
 		return -ENOENT;
 
@@ -67,6 +70,8 @@ static int hello_open(const char *path, struct fuse_file_info *fi)
 static int hello_read(const char *path, char *buf, size_t size, off_t offset,
 		      struct fuse_file_info *fi)
 {
+	printf("Hello from read");
+
 	size_t len;
 	(void) fi;
 	if(strcmp(path, hello_path) != 0)
@@ -83,11 +88,21 @@ static int hello_read(const char *path, char *buf, size_t size, off_t offset,
 	return size;
 }
 
+static int xmp_mkdir(const char *path, mode_t mode)
+{
+	
+	const char msg[] = "Hello from kdir!";
+	write(STDERR_FILENO, msg, sizeof(msg)-1);
+	return 0;
+}
+
 static struct fuse_operations hello_oper = {
 	.getattr	= hello_getattr,
 	.readdir	= hello_readdir,
 	.open		= hello_open,
 	.read		= hello_read,
+	.mkdir      = xmp_mkdir,
+
 };
 
 int main(int argc, char *argv[])

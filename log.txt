@@ -1,0 +1,15 @@
+FS Initialized
+Running getattr on /
+Running getattr on /c
+Running create
+Adding new entry to table
+Parent name:/, Child name:c
+Running getattr on /c
+Running write
+Writing LUL
+to /c
+Running getattr on /c
+Running open
+Running getattr on /c
+Running open
+Running getattr on /

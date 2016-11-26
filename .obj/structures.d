@@ -1,2 +1,3 @@
-.obj/structures.o: structures.cpp
+.obj/structures.o: structures.cpp structures.h
 structures.cpp:
+structures.h:

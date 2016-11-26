@@ -1,15 +1,54 @@
 FS Initialized
 Running getattr on /
+Running getattr on /a
+Running create
+Adding new entry to table
+Parent name:/, Child name:a
+Running getattr on /a
+Running write
+Flags=32769Flags=32768Writing LOL
+to /a
+Running open
+Running write
+Flags=33793Flags=33792Writing meow
+to /a
+Running getattr on /a
+Running open
+Running read on /a
+Running getattr on /a
+Running read on /a
+Running getattr on /
+Running getattr on /
+Running getattr on /
+Running getattr on /
+Running getattr on /
 Running getattr on /c
 Running create
 Adding new entry to table
 Parent name:/, Child name:c
 Running getattr on /c
-Running write
-Writing LUL
-to /c
+Running getattr on /c
 Running getattr on /c
 Running open
+Running read on /c
 Running getattr on /c
+Running open
+Running getattr on /b
+Running create
+Adding new entry to table
+Parent name:/, Child name:b
+Running getattr on /b
+Running write
+Flags=32769Flags=32768Writing lol
+to /b
+Running getattr on /b
+Running open
+Running read on /b
+Running getattr on /b
+Running read on /b
+Running getattr on /b
 Running open
 Running getattr on /
+Running readdir
+Running getattr on /a
+Running getattr on /.gitignore

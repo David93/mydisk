@@ -4,3 +4,4 @@ make
 ./hello hmm
 cd hmm
 echo "LOL" > a
+echo "meow" >> a

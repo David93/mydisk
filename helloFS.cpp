@@ -84,13 +84,19 @@ int HelloFS::read(const char *path, char *buf, size_t size, off_t offset,
 int HelloFS::write(const char *path,const char *buf, size_t size, off_t offset,
 		              struct fuse_file_info *fi)
 {
-	log_msg("Running write\n");	
+	log_msg("Running write\n");
+	log_msg("Flags="+to_string(fi->flags ));	
+	log_msg("Flags="+to_string(fi->flags & 33792));
+
 	if(table.count(string(path))==1)
 	{
-		table[string(path)].data=string(buf);
+		if (fi->flags & O_APPEND)
+			table[string(path)].data+=string(buf);
+		else
+			table[string(path)].data=string(buf);
 		log_msg("Writing "+string(buf)+"to "+string(path)+"\n");	
 	}
-	return 100;
+	return strlen(buf);
 
 }
 

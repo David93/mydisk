@@ -1,2 +1,2 @@
 #!/bin/bash
-fusermount -u /home/dmjoshy/hmm
+fusermount -u hmm

@@ -1,5 +1,5 @@
 #!/bin/bash
-fusermount -u /home/dmjoshy/hmm
+fusermount -u hmm
 make
-./mydisk /home/dmjoshy/hmm
-cd ../hmm
+./mydisk hmm
+cd hmm

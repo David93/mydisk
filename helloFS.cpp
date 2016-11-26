@@ -14,6 +14,7 @@ static const char *hello_path = "/hello";
 
 int HelloFS::getattr(const char *path, struct stat *stbuf)
 {
+	
 	int res = 0;
 
 	memset(stbuf, 0, sizeof(struct stat));
@@ -24,10 +25,14 @@ int HelloFS::getattr(const char *path, struct stat *stbuf)
 		stbuf->st_mode = S_IFREG | 0444;
 		stbuf->st_nlink = 1;
 		stbuf->st_size = strlen(hello_str);
-	} else
-		res = -ENOENT;
-
-	return res;
+	} 
+	else if (strcmp(path, "a") == 0) {
+		stbuf->st_mode = S_IFREG | 0444;
+		stbuf->st_nlink = 1;
+		stbuf->st_size = strlen("lol");
+	} 
+	
+	return 0;
 }
 
 int HelloFS::readdir(const char *path, void *buf, fuse_fill_dir_t filler,
@@ -38,8 +43,7 @@ int HelloFS::readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 
 	filler(buf, ".", NULL, 0);
 	filler(buf, "..", NULL, 0);
-	filler(buf, hello_path + 1, NULL, 0);
-
+	
 	return 0;
 }
 
@@ -78,9 +82,21 @@ int HelloFS::read(const char *path, char *buf, size_t size, off_t offset,
 
 	return size;
 }
-/*
+
 int HelloFS::mknod(const char *pathname, mode_t mode, dev_t dev)
 {
 	return 0;
 }
-*/
+int HelloFS::statfs(const char *path, struct statvfs *buf)
+{
+	return 0;
+}
+int HelloFS::create(const char *path, mode_t mode, struct fuse_file_info *fi)
+{
+	return 0;
+}
+int HelloFS::fgetattr(const char *path, struct stat *buf,
+                            struct fuse_file_info *fi)
+{
+	return 0;
+}

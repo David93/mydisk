@@ -24,6 +24,11 @@ public:
 
   static int read(const char *path, char *buf, size_t size, off_t offset,
                   struct fuse_file_info *fi);
+  static int statfs(const char *path, struct statvfs *buf);
+  static int mknod(const char *pathname, mode_t mode, dev_t dev);
+  static int create(const char *path, mode_t mode, struct fuse_file_info *fi);
+  static int fgetattr(const char *path, struct stat *buf,
+                            struct fuse_file_info *fi);
 };
 
 #endif

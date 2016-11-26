@@ -1,5 +1,5 @@
 #!/bin/bash
 fusermount -u hmm
 make
-./mydisk hmm
+./hello hmm
 cd hmm

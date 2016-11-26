@@ -3,9 +3,9 @@
 #include "helloFS.h"
 
 #include <iostream>
-
+#include "structures.h"
 #include <stdio.h>
-
+#include <string>
 // include in one .cpp file
 #include "Fuse-impl.h"
 
@@ -46,13 +46,17 @@ int HelloFS::readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 
 int HelloFS::open(const char *path, struct fuse_file_info *fi)
 {
-	if (strcmp(path, hello_path) != 0)
-		return -ENOENT;
-
-	if ((fi->flags & 3) != O_RDONLY)
-		return -EACCES;
-
+	//if (strcmp(path, hello_path) != 0)
+	//	return -ENOENT;
+	if ((fi->flags & 256) == O_CREAT)
+	{
+		//add to table
+		string s(path);
+		addTable(s);
+	}
+	
 	return 0;
+
 }
 
 
@@ -74,3 +78,9 @@ int HelloFS::read(const char *path, char *buf, size_t size, off_t offset,
 
 	return size;
 }
+/*
+int HelloFS::mknod(const char *pathname, mode_t mode, dev_t dev)
+{
+	return 0;
+}
+*/

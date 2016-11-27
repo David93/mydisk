@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 
   HelloFS fs;
   initFS();
+  
   int status = fs.run(argc, argv);
 
   return status;

@@ -46,6 +46,7 @@ void addTable(string path, int isFolder){
 }
 void rmTable(string path){
 	log_msg("Erasing path "+path+"\n");
+	//Calling delete on child list
 	table.erase(path);
 	int found=path.find_last_of("/");
 	string parent;
@@ -55,15 +56,13 @@ void rmTable(string path){
 		parent="/";
 	string child=path.substr(found+1);
 	list<dir_node>::iterator it;
-	printtable();
 	log_msg("Parent name:"+parent);
 	log_msg(", Child name:"+child+"\n");
-	
+	//Deleting myself from parent's list
 	for (it = table[string(parent)].child_list.begin(); it != table[string(parent)].child_list.end(); ++it) {
 		if(child.compare((*it).name)==0)
    		{	it=table[string(parent)].child_list.erase(it);}
 	}
-	printtable(); 
 	log_msg("Finished erasing path "+path+"\n");
 }
 void rmfTable(string path){
@@ -78,9 +77,8 @@ void rmfTable(string path){
 	string child=path.substr(found+1);
 	
    	list<dir_node>::iterator it2;
-   	printtable();
-   	
-	for(it2=table[path].child_list.begin();it2!=table[path].child_list.end();it2=table[path].child_list.begin()){
+   	//Calling delete on child list
+   	for(it2=table[path].child_list.begin();it2!=table[path].child_list.end();it2=table[path].child_list.begin()){
 		log_msg("Deleting sub "+path+"/"+(*it2).name+"\n");
 		if((*it2).isFolder==1)
 			rmfTable(path+"/"+(*it2).name);
@@ -88,8 +86,9 @@ void rmfTable(string path){
 			rmTable(path+"/"+(*it2).name);
 		
 	}
+	//Deleting myself from table
 	table.erase(path);
-	printtable();
+	//Deleting myself from parent's list
 	list<dir_node>::iterator it;
 	for (it = table[string(parent)].child_list.begin(); it != table[string(parent)].child_list.end(); ++it) {
 		if(child.compare((*it).name)==0)
@@ -98,7 +97,7 @@ void rmfTable(string path){
    			it=table[string(parent)].child_list.erase(it);break;
    		}
 	} 
-	printtable();
+	
 }
 void printtable(){
 	map<string,dir_node>::iterator it;

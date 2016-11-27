@@ -1,8 +1,3 @@
 FS Initialized
 Running readdir
 ls at path /
-Running mkdir
-Adding new path to table:/kek
-Parent name:/, Child name:kek
-Running readdir
-ls at path /kek

@@ -42,9 +42,14 @@ int HelloFS::readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 	list<dir_node>::iterator it;
 	//log_msg("Helloo");
 	//filler(buf, "a", NULL, 0);
-	list<dir_node> files=table[string(path)].child_list;
+	list<dir_node> files;
+	if(strlen(path)==1)
+		files=table[string(path)].child_list;
+	else
+		files=table[string(path)+"/"].child_list;
 	//filler(buf,path+1,NULL,0);
-	//log_msg(table[string(path)].name);
+	log_msg("ls at path "+string(path)+"\n");
+	
 	for (it = files.begin(); it != files.end(); ++it) {
    		filler(buf, (*it).name.c_str(), NULL, 0);
 	} 
@@ -111,5 +116,21 @@ int HelloFS::create(const char *path, mode_t mode, struct fuse_file_info *fi)
 }
 
 int HelloFS::utime (const char *path, struct utimbuf * s){
+	return 0;
+}
+int HelloFS::unlink (const char *path){
+	log_msg("Running unlink\n");
+	rmTable(string(path));
+	return 0;
+}
+int HelloFS::mkdir (const char *path, mode_t mode){
+	log_msg("Running mkdir\n");
+	string s(path);
+	addTable(s,1);
+	return 0;
+}
+int HelloFS::rmdir (const char *path){
+	log_msg("Running unlink\n");
+	rmfTable(string(path));
 	return 0;
 }

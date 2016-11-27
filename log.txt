@@ -5,50 +5,91 @@ Running create
 Adding new entry to table
 Parent name:/, Child name:a
 Running getattr on /a
-Running write
-Flags=32769Flags=32768Writing LOL
-to /a
-Running open
-Running write
-Flags=33793Flags=33792Writing meow
-to /a
 Running getattr on /a
-Running open
-Running read on /a
-Running getattr on /a
-Running read on /a
-Running getattr on /
-Running getattr on /
-Running getattr on /
-Running getattr on /
-Running getattr on /
+Running getattr on /b
+Running create
+Adding new entry to table
+Parent name:/, Child name:b
+Running getattr on /b
+Running getattr on /b
 Running getattr on /c
 Running create
 Adding new entry to table
 Parent name:/, Child name:c
 Running getattr on /c
 Running getattr on /c
-Running getattr on /c
-Running open
-Running read on /c
-Running getattr on /c
-Running open
+Running getattr on /d
+Running mkdir
+Adding new entry to table
+Parent name:/, Child name:d
+Running getattr on /d
+Running readdir
+ls at path /
+Running getattr on /a
 Running getattr on /b
+Running getattr on /c
+Running getattr on /d
+Running getattr on /
+Running getattr on /d
+Running getattr on /d/kek
 Running create
 Adding new entry to table
-Parent name:/, Child name:b
-Running getattr on /b
-Running write
-Flags=32769Flags=32768Writing lol
-to /b
-Running getattr on /b
-Running open
-Running read on /b
-Running getattr on /b
-Running read on /b
-Running getattr on /b
-Running open
+Parent name:/d/, Child name:kek
+Running getattr on /d/kek
+Running getattr on /d/kek
+Running readdir
+ls at path /d
+Running getattr on /d/lul
+Running mkdir
+Adding new entry to table
+Parent name:/d/, Child name:lul
+Running getattr on /d/lul
+Running readdir
+ls at path /d
+Running getattr on /d/kek
+Running getattr on /d/lul
+Running getattr on /
+Running getattr on /d
+Running getattr on /d/lul
+Running readdir
+ls at path /d/lul
+Running getattr on /
+Running getattr on /d
+Running getattr on /d/lul
 Running getattr on /
 Running readdir
+ls at path /
 Running getattr on /a
-Running getattr on /.gitignore
+Running getattr on /b
+Running getattr on /c
+Running getattr on /d
+Running getattr on /
+Running getattr on /d
+Running readdir
+ls at path /d
+Running getattr on /d/kek
+Running getattr on /d/lul
+Running getattr on /d/lul
+Running getattr on /d/lul
+Running unlink
+Running readdir
+ls at path /d
+Running getattr on /d/kek
+Running getattr on /d/kek
+Running unlink
+Running readdir
+ls at path /d
+Running getattr on /
+Running getattr on /d
+Running readdir
+ls at path /
+Running getattr on /a
+Running getattr on /b
+Running getattr on /c
+Running getattr on /
+Running getattr on /
+Running getattr on /
+Running getattr on /
+Running getattr on /
+Running getattr on /
+Running getattr on /

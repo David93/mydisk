@@ -18,4 +18,6 @@ extern map<string,dir_node> table;
 
 void initFS();
 void addTable(string path, int isFolder);
+void rmTable(string path);
+void rmfTable(string path);
 void log_msg(string path);

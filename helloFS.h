@@ -32,6 +32,9 @@ public:
   //static int fgetattr(const char *path, struct stat *buf,
    //                         struct fuse_file_info *fi);
   static int utime (const char *path, struct utimbuf * s);
+  static int unlink (const char *path);
+  static int mkdir (const char *path, mode_t mode);
+  static int rmdir (const char *path);
 };
 
 #endif

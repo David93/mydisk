@@ -4,6 +4,7 @@
 #include <fstream>
 #include <list>
 #include "structures.h"
+#include <stdio.h>
 using namespace std;
 int run=0;
 map<string,dir_node> table;
@@ -29,7 +30,7 @@ void initFS(){
 void addTable(string path, int isFolder){
 	log_msg("Adding new entry to table\n");
 	int found=path.find_last_of("/");
-	string parent=path.substr(0,1);
+	string parent=path.substr(0,found+1);
 	dir_node child;
 	child.isFolder=isFolder;
 	child.name=path.substr(found+1);
@@ -39,4 +40,29 @@ void addTable(string path, int isFolder){
 	table[parent].child_list.push_back(child);
 
 }
-
+void rmTable(string path){
+	table.erase(path);
+	int found=path.find_last_of("/");
+	string parent=path.substr(0,found+1);
+	string child=path.substr(found+1);
+	list<dir_node>::iterator it;
+	for (it = table[string(parent)].child_list.begin(); it != table[string(parent)].child_list.end(); ++it) {
+		if(child.compare((*it).name)==0)
+   		{	it=table[string(parent)].child_list.erase(it);break;}
+	} 
+	
+}
+void rmfTable(string path){
+	table.erase(path);
+	int found=path.find_last_of("/");
+	string parent=path.substr(0,found+1);
+	string child=path.substr(found+1);
+	list<dir_node>::iterator it;
+	for (it = table[string(parent)].child_list.begin(); it != table[string(parent)].child_list.end(); ++it) {
+		if(child.compare((*it).name)==0)
+   		{	//if((*it).isFolder==1)
+   			//	rmfTable
+   			it=table[string(parent)].child_list.erase(it);break;}
+	} 
+	
+}

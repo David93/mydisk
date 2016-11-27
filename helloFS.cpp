@@ -15,7 +15,7 @@ int HelloFS::getattr(const char *path, struct stat *stbuf)
 {
 	
 	//int res = 0;
-	log_msg("Running getattr on "+string(path)+"\n");
+	//log_msg("Running getattr on "+string(path)+"\n");
 	memset(stbuf, 0, sizeof(struct stat));
 	if(table.count(string(path))==0)
 		return -ENOENT;
@@ -43,10 +43,7 @@ int HelloFS::readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 	//log_msg("Helloo");
 	//filler(buf, "a", NULL, 0);
 	list<dir_node> files;
-	if(strlen(path)==1)
-		files=table[string(path)].child_list;
-	else
-		files=table[string(path)+"/"].child_list;
+	files=table[string(path)].child_list;
 	//filler(buf,path+1,NULL,0);
 	log_msg("ls at path "+string(path)+"\n");
 	
@@ -130,7 +127,7 @@ int HelloFS::mkdir (const char *path, mode_t mode){
 	return 0;
 }
 int HelloFS::rmdir (const char *path){
-	log_msg("Running unlink\n");
+	log_msg("Running rmdir\n");
 	rmfTable(string(path));
 	return 0;
 }

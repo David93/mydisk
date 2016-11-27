@@ -1,2 +1,2 @@
 #!/bin/bash
-fusermount -u hmm
+fusermount -u ok

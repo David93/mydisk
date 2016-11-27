@@ -21,3 +21,4 @@ void addTable(string path, int isFolder);
 void rmTable(string path);
 void rmfTable(string path);
 void log_msg(string path);
+void printtable();

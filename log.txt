@@ -1,95 +1,75 @@
 FS Initialized
-Running getattr on /
-Running getattr on /a
-Running create
-Adding new entry to table
-Parent name:/, Child name:a
-Running getattr on /a
-Running getattr on /a
-Running getattr on /b
-Running create
-Adding new entry to table
-Parent name:/, Child name:b
-Running getattr on /b
-Running getattr on /b
-Running getattr on /c
-Running create
-Adding new entry to table
-Parent name:/, Child name:c
-Running getattr on /c
-Running getattr on /c
-Running getattr on /d
+Running readdir
+ls at path /
+Running open
+Running open
+Running open
 Running mkdir
-Adding new entry to table
+Adding new path to table:/d
 Parent name:/, Child name:d
-Running getattr on /d
+Running open
+Running rmdir
+Erasing path /d
+Printing out the MAP
+/:ROOT:a b c d 
+/a:a:
+/b:b:
+/c:c:
+/d:d:
+/d/b:b:
+Printing out the MAP
+/:ROOT:a b c d 
+/a:a:
+/b:b:
+/c:c:
+/d/b:b:
+Printing out the MAP
+/:ROOT:a b c 
+/a:a:
+/b:b:
+/c:c:
+/d/b:b:
 Running readdir
 ls at path /
-Running getattr on /a
-Running getattr on /b
-Running getattr on /c
-Running getattr on /d
-Running getattr on /
-Running getattr on /d
-Running getattr on /d/kek
-Running create
-Adding new entry to table
-Parent name:/d/, Child name:kek
-Running getattr on /d/kek
-Running getattr on /d/kek
-Running readdir
-ls at path /d
-Running getattr on /d/lul
-Running mkdir
-Adding new entry to table
-Parent name:/d/, Child name:lul
-Running getattr on /d/lul
-Running readdir
-ls at path /d
-Running getattr on /d/kek
-Running getattr on /d/lul
-Running getattr on /
-Running getattr on /d
-Running getattr on /d/lul
-Running readdir
-ls at path /d/lul
-Running getattr on /
-Running getattr on /d
-Running getattr on /d/lul
-Running getattr on /
 Running readdir
 ls at path /
-Running getattr on /a
-Running getattr on /b
-Running getattr on /c
-Running getattr on /d
-Running getattr on /
-Running getattr on /d
-Running readdir
-ls at path /d
-Running getattr on /d/kek
-Running getattr on /d/lul
-Running getattr on /d/lul
-Running getattr on /d/lul
 Running unlink
-Running readdir
-ls at path /d
-Running getattr on /d/kek
-Running getattr on /d/kek
+Erasing path /a
+Printing out the MAP
+/:ROOT:a b c 
+/b:b:
+/c:c:
+/d/b:b:
+Parent name:/, Child name:a
+Printing out the MAP
+/:ROOT:b c 
+/b:b:
+/c:c:
+/d/b:b:
+Finished erasing path /a
 Running unlink
-Running readdir
-ls at path /d
-Running getattr on /
-Running getattr on /d
+Erasing path /c
+Printing out the MAP
+/:ROOT:b c 
+/b:b:
+/d/b:b:
+Parent name:/, Child name:c
+Printing out the MAP
+/:ROOT:b 
+/b:b:
+/d/b:b:
+Finished erasing path /c
+Running unlink
+Erasing path /b
+Printing out the MAP
+/:ROOT:b 
+/d/b:b:
+Parent name:/, Child name:b
+Printing out the MAP
+/:ROOT:
+/d/b:b:
+Finished erasing path /b
 Running readdir
 ls at path /
-Running getattr on /a
-Running getattr on /b
-Running getattr on /c
-Running getattr on /
-Running getattr on /
-Running getattr on /
-Running getattr on /
-Running getattr on /
-Running getattr on /
-Running getattr on /
+Running readdir
+ls at path /

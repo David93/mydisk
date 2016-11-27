@@ -1,7 +1,11 @@
 #!/bin/bash
-fusermount -u hmm
+fusermount -u ok
 make
-./hello hmm
-cd hmm
+./hello ok
+cd ok
 touch a b c
 mkdir d
+cd d
+touch b
+cd ..
+rmdir d

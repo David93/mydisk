@@ -7,5 +7,6 @@ touch a b c
 mkdir d
 cd d
 touch b
+mkdir kek
 cd ..
 rmdir d

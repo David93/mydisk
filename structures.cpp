@@ -79,15 +79,15 @@ void rmfTable(string path){
 	
    	list<dir_node>::iterator it2;
    	printtable();
-   	/*
-	for(it2=table[path].child_list.begin();it2!=table[path].child_list.end();++it2){
+   	
+	for(it2=table[path].child_list.begin();it2!=table[path].child_list.end();it2=table[path].child_list.begin()){
 		log_msg("Deleting sub "+path+"/"+(*it2).name+"\n");
 		if((*it2).isFolder==1)
 			rmfTable(path+"/"+(*it2).name);
 		else
 			rmTable(path+"/"+(*it2).name);
 		
-	}*/
+	}
 	table.erase(path);
 	printtable();
 	list<dir_node>::iterator it;

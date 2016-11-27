@@ -1,75 +1,8 @@
 FS Initialized
 Running readdir
 ls at path /
-Running open
-Running open
-Running open
 Running mkdir
-Adding new path to table:/d
-Parent name:/, Child name:d
-Running open
-Running rmdir
-Erasing path /d
-Printing out the MAP
-/:ROOT:a b c d 
-/a:a:
-/b:b:
-/c:c:
-/d:d:
-/d/b:b:
-Printing out the MAP
-/:ROOT:a b c d 
-/a:a:
-/b:b:
-/c:c:
-/d/b:b:
-Printing out the MAP
-/:ROOT:a b c 
-/a:a:
-/b:b:
-/c:c:
-/d/b:b:
+Adding new path to table:/kek
+Parent name:/, Child name:kek
 Running readdir
-ls at path /
-Running readdir
-ls at path /
-Running unlink
-Erasing path /a
-Printing out the MAP
-/:ROOT:a b c 
-/b:b:
-/c:c:
-/d/b:b:
-Parent name:/, Child name:a
-Printing out the MAP
-/:ROOT:b c 
-/b:b:
-/c:c:
-/d/b:b:
-Finished erasing path /a
-Running unlink
-Erasing path /c
-Printing out the MAP
-/:ROOT:b c 
-/b:b:
-/d/b:b:
-Parent name:/, Child name:c
-Printing out the MAP
-/:ROOT:b 
-/b:b:
-/d/b:b:
-Finished erasing path /c
-Running unlink
-Erasing path /b
-Printing out the MAP
-/:ROOT:b 
-/d/b:b:
-Parent name:/, Child name:b
-Printing out the MAP
-/:ROOT:
-/d/b:b:
-Finished erasing path /b
-Running readdir
-ls at path /
-Running readdir
-ls at path /
+ls at path /kek

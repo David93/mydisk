@@ -1,4 +1,4 @@
 #!/bin/bash
 fusermount -u ok
 make
-./hello ok
+./hello ok 512

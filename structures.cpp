@@ -7,25 +7,44 @@
 #include <stdio.h>
 using namespace std;
 int run=0;
+long size;
+long current_size=0;
 map<string,dir_node> table;
 void log_msg(string s){
 
+  	
   ofstream myfile;
   if(run==1)
-  	myfile.open ("/home/dmjoshy/mydisk/log.txt",ios::out | ios::app );
+  	myfile.open ("/afs/unity.ncsu.edu/users/d/dmjoshy/501p4/mydisk/log.txt",ios::out | ios::app );
   else
-  	myfile.open ("/home/dmjoshy/mydisk/log.txt");
+  	myfile.open ("/afs/unity.ncsu.edu/users/d/dmjoshy/501p4/mydisk/log.txt");
   run =1;
   myfile << s;
   myfile.close();
-
+	
 }
-void initFS(){
+int checksize(int bytes){
+	if(current_size+bytes>size)
+		return 0;
+	current_size+=bytes;
+	return 1;
+}
+void initFS(string disk_size, string filename){
 	dir_node root;
 	root.isFolder=1;
 	root.name="ROOT";
 	table["/"]=root;
-	//log_msg("FS Initialized\n");
+	int k=0;
+	size=atoi(disk_size.c_str())*1024*1024;
+	if(filename.compare("none.lol")!=0){
+		if(ifstream(filename))
+		{
+			ifstream image;
+			image.open (filename);
+			k=1;
+		}
+	}
+	log_msg("FS Initialized with size " + to_string(size) +" from image at "+to_string(k)+"\n");
 }
 
 void addTable(string path, int isFolder){

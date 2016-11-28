@@ -100,6 +100,9 @@ int HelloFS::write(const char *path,const char *buf, size_t size, off_t offset,
 	//log_msg("Flags="+to_string(fi->flags & 33792));
 	if(table.count(string(path))==0)
 		return -ENOENT;
+	if(checksize(int(size))==0){
+		return -EDQUOT;
+	}
 	if(table.count(string(path))==1)
 	{
 		//log_msg("Running write on "+string(path)+"\n");
@@ -126,14 +129,14 @@ int HelloFS::unlink (const char *path){
 	if(table.count(string(path))==0)
 		return -ENOENT;
 	
-	log_msg("Running unlink on "+string(path)+"\n");
+	//log_msg("Running unlink on "+string(path)+"\n");
 	rmTable(string(path));
 	return 0;
 }
 int HelloFS::mkdir (const char *path, mode_t mode){
 	//log_msg("Running mkdir\n");
-	if(table.count(string(path))==0)
-		return -ENOENT;
+	//if(table.count(string(path))==0)
+	//	return -ENOENT;
 	
 	string s(path);
 	addTable(s,1);
@@ -143,4 +146,7 @@ int HelloFS::rmdir (const char *path){
 	//log_msg("Running rmdir\n");
 	rmfTable(string(path));
 	return 0;
+}
+void HelloFS::destroy (void *private_data){
+	log_msg("Bye bye!");
 }

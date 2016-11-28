@@ -16,7 +16,8 @@ class dir_node
 
 extern map<string,dir_node> table;
 
-void initFS();
+void initFS(string disk_size, string filename);
+int checksize(int bytes);
 void addTable(string path, int isFolder);
 void rmTable(string path);
 void rmfTable(string path);

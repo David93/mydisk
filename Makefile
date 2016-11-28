@@ -1,4 +1,4 @@
-PROG=hello
+PROG=ramdisk
 OBJDIR=.obj
 CC=g++
 
@@ -7,7 +7,7 @@ LDFLAGS = `pkg-config fuse --libs`
 
 $(shell mkdir -p $(OBJDIR)) 
 
-OBJS = $(OBJDIR)/structures.o $(OBJDIR)/hello.o $(OBJDIR)/helloFS.o
+OBJS = $(OBJDIR)/structures.o $(OBJDIR)/ramdisk.o $(OBJDIR)/helloFS.o
 
 $(PROG) : $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(PROG)

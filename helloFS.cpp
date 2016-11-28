@@ -58,6 +58,8 @@ int HelloFS::open(const char *path, struct fuse_file_info *fi)
 {
 	//log_msg("Running open\n");
 	//log_msg("Flags="+to_string(fi->flags));
+	if(table.count(string(path))==0)
+		return -ENOENT;
 	
 	return 0;
 
@@ -66,6 +68,9 @@ int HelloFS::open(const char *path, struct fuse_file_info *fi)
 int HelloFS::opendir (const char *path, struct fuse_file_info *fi)
 {
 	//log_msg("Running opendir\n");
+	if(table.count(string(path))==0)
+		return -ENOENT;
+	
 	return 0;
 }
 int HelloFS::read(const char *path, char *buf, size_t size, off_t offset,
@@ -90,17 +95,19 @@ int HelloFS::read(const char *path, char *buf, size_t size, off_t offset,
 int HelloFS::write(const char *path,const char *buf, size_t size, off_t offset,
 		              struct fuse_file_info *fi)
 {
-	log_msg("Running write\n");
+	//log_msg("Running write\n");
 	//log_msg("Flags="+to_string(fi->flags ));	
 	//log_msg("Flags="+to_string(fi->flags & 33792));
-
+	if(table.count(string(path))==0)
+		return -ENOENT;
 	if(table.count(string(path))==1)
 	{
+		//log_msg("Running write on "+string(path)+"\n");
 		if ((fi->flags & O_APPEND)==O_APPEND)
 			table[string(path)].data+=string(buf);
 		else
 			table[string(path)].data=string(buf);
-		log_msg("Writing "+string(buf)+"to "+string(path)+"\n");	
+		//log_msg("Writing "+string(buf)+"to "+string(path)+"\n");	
 	}
 	return size;
 
@@ -116,12 +123,18 @@ int HelloFS::create(const char *path, mode_t mode, struct fuse_file_info *fi)
 	return 0;
 }
 int HelloFS::unlink (const char *path){
-	//log_msg("Running unlink\n");
+	if(table.count(string(path))==0)
+		return -ENOENT;
+	
+	log_msg("Running unlink on "+string(path)+"\n");
 	rmTable(string(path));
 	return 0;
 }
 int HelloFS::mkdir (const char *path, mode_t mode){
 	//log_msg("Running mkdir\n");
+	if(table.count(string(path))==0)
+		return -ENOENT;
+	
 	string s(path);
 	addTable(s,1);
 	return 0;

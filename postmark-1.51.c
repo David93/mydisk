@@ -55,7 +55,7 @@ Versions:
 #include <stdlib.h>
 #include <time.h>
 #include <fcntl.h>
-
+//#include <errno.h>
 #define PM_VERSION "v1.51 : 8/14/01"
 
 #ifdef _WIN32
@@ -67,7 +67,7 @@ Versions:
 #define SEPARATOR "\\"
 #else
 extern char *getwd();
-
+//extern int errno
 #define GETWD(x) getwd(x)
 #define MKDIR(x) mkdir(x,0700)
 #define SEPARATOR "/"
@@ -697,8 +697,8 @@ int buffered; /* 1=buffered I/O (default), 0=unbuffered I/O */
             write_blocks(fd,file_table[free_file].size);
          }
       else
-         fprintf(stderr,"Error: cannot open '%s' for writing\n",
-            file_table[free_file].name);
+         fprintf(stderr,"Error: cannot open '%s' for writing, error %d\n",
+            file_table[free_file].name,fd);
       }
 }
 
@@ -758,8 +758,8 @@ int buffered; /* 1=buffered I/O (default), 0=unbuffered I/O */
       files_read++;
       }
    else
-      fprintf(stderr,"Error: cannot open '%s' for reading\n",
-         file_table[number].name);
+      fprintf(stderr,"Error: cannot open '%s' for reading ret %d\n",
+         file_table[number].name, fd);
 }
 
 /* appends random data to a chosen file up to the maximum configured length */

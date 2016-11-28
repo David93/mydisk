@@ -67,7 +67,7 @@ void addTable(string path, int isFolder){
 	child.name=path.substr(found+1);
 	//log_msg("Parent name:"+parent);
 	//log_msg(", Child name:"+child.name+"\n");
-	table[path]=child;
+	table.insert({path,child});
 	table[parent].child_list.push_back(child);
 
 }

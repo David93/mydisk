@@ -1,4 +1,4 @@
 #!/bin/bash
 fusermount -u ok
 make
-./ramdisk ok 512 
+./ramdisk ok 1 

@@ -1,1 +1,1 @@
-FS Initialized with size 536870912 from image at 0
+FS Initialized with size 1048576 from image at 0

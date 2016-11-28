@@ -9,6 +9,7 @@ using namespace std;
 int run=0;
 map<string,dir_node> table;
 void log_msg(string s){
+
   ofstream myfile;
   if(run==1)
   	myfile.open ("/home/dmjoshy/mydisk/log.txt",ios::out | ios::app );
@@ -24,11 +25,11 @@ void initFS(){
 	root.isFolder=1;
 	root.name="ROOT";
 	table["/"]=root;
-	log_msg("FS Initialized\n");
+	//log_msg("FS Initialized\n");
 }
 
 void addTable(string path, int isFolder){
-	log_msg("Adding new path to table:"+path+"\n");
+	//log_msg("Adding new path to table:"+path+"\n");
 	int found=path.find_last_of("/");
 	string parent;
 	if(found!=0)
@@ -38,14 +39,14 @@ void addTable(string path, int isFolder){
 	dir_node child;
 	child.isFolder=isFolder;
 	child.name=path.substr(found+1);
-	log_msg("Parent name:"+parent);
-	log_msg(", Child name:"+child.name+"\n");
+	//log_msg("Parent name:"+parent);
+	//log_msg(", Child name:"+child.name+"\n");
 	table[path]=child;
 	table[parent].child_list.push_back(child);
 
 }
 void rmTable(string path){
-	log_msg("Erasing path "+path+"\n");
+	//log_msg("Erasing path "+path+"\n");
 	//Calling delete on child list
 	table.erase(path);
 	int found=path.find_last_of("/");
@@ -56,18 +57,18 @@ void rmTable(string path){
 		parent="/";
 	string child=path.substr(found+1);
 	list<dir_node>::iterator it;
-	log_msg("Parent name:"+parent);
-	log_msg(", Child name:"+child+"\n");
+	//log_msg("Parent name:"+parent);
+	//log_msg(", Child name:"+child+"\n");
 	//Deleting myself from parent's list
 	for (it = table[string(parent)].child_list.begin(); it != table[string(parent)].child_list.end(); ++it) {
 		if(child.compare((*it).name)==0)
    		{	it=table[string(parent)].child_list.erase(it);}
 	}
-	log_msg("Finished erasing path "+path+"\n");
+	//log_msg("Finished erasing path "+path+"\n");
 }
 void rmfTable(string path){
 	
-	log_msg("Erasing path "+path+"\n");
+	//log_msg("Erasing path "+path+"\n");
 	int found=path.find_last_of("/");
 	string parent;
 	if(found!=0)
@@ -79,7 +80,7 @@ void rmfTable(string path){
    	list<dir_node>::iterator it2;
    	//Calling delete on child list
    	for(it2=table[path].child_list.begin();it2!=table[path].child_list.end();it2=table[path].child_list.begin()){
-		log_msg("Deleting sub "+path+"/"+(*it2).name+"\n");
+		//log_msg("Deleting sub "+path+"/"+(*it2).name+"\n");
 		if((*it2).isFolder==1)
 			rmfTable(path+"/"+(*it2).name);
 		else

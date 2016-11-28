@@ -5,7 +5,8 @@
 0.21 read, write handling
 0.4 Added mkdir, rmdir, unlink
 0.5 Fixed recursive delete
-Issue: 
+
+Issues: 
 
 1)Writing to an existing file w/o append
 2)opendir?

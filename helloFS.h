@@ -31,10 +31,10 @@ public:
   static int create(const char *path, mode_t mode, struct fuse_file_info *fi);
   //static int fgetattr(const char *path, struct stat *buf,
    //                         struct fuse_file_info *fi);
-  static int utime (const char *path, struct utimbuf * s);
-  static int unlink (const char *path);
+   static int unlink (const char *path);
   static int mkdir (const char *path, mode_t mode);
   static int rmdir (const char *path);
+  static int opendir (const char *path, struct fuse_file_info *fi);
 };
 
 #endif

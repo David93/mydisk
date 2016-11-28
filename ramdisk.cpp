@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
   argv[2]=NULL;
   if(argc==3)
   {	
-  	initFS(size,"none.lol");
+  	initFS(size,"none");
   	status = fs.run(argc-1, argv);
   }
   if(argc==4)

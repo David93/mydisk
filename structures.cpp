@@ -9,6 +9,7 @@ using namespace std;
 int run=0;
 long size;
 long current_size=0;
+string imagename;
 map<string,dir_node> table;
 void log_msg(string s){
 
@@ -23,8 +24,10 @@ void log_msg(string s){
   myfile.close();
 	
 }
-int checksize(int bytes){
-	if(current_size+bytes>size)
+int checksize(int bytes, int x, int old_length){
+	if(current_size+bytes>size && x!=0)
+		return 0;
+	if(current_size-old_length+bytes>size && x==0)
 		return 0;
 	current_size+=bytes;
 	return 1;
@@ -33,14 +36,17 @@ void initFS(string disk_size, string filename){
 	dir_node root;
 	root.isFolder=1;
 	root.name="ROOT";
+	root.path="/";
 	table["/"]=root;
 	int k=0;
+	imagename=filename;
 	size=atoi(disk_size.c_str())*1024*1024;
-	if(filename.compare("none.lol")!=0){
+	//size=10;
+	if(filename.compare("none")!=0){
 		if(ifstream(filename))
 		{
-			ifstream image;
-			image.open (filename);
+
+			restoreimage();
 			k=1;
 		}
 	}
@@ -56,6 +62,7 @@ void addTable(string path, int isFolder){
 	else
 		parent="/";
 	dir_node child;
+	child.path=path;
 	child.isFolder=isFolder;
 	child.name=path.substr(found+1);
 	//log_msg("Parent name:"+parent);
@@ -67,6 +74,7 @@ void addTable(string path, int isFolder){
 void rmTable(string path){
 	//log_msg("Erasing path "+path+"\n");
 	//Calling delete on child list
+	current_size-=(table[path].data).length();
 	table.erase(path);
 	int found=path.find_last_of("/");
 	string parent;
@@ -75,6 +83,7 @@ void rmTable(string path){
 	else
 		parent="/";
 	string child=path.substr(found+1);
+
 	list<dir_node>::iterator it;
 	//log_msg("Parent name:"+parent);
 	//log_msg(", Child name:"+child+"\n");
@@ -129,4 +138,72 @@ void printtable(){
 			log_msg(it2->name+" ");
 		log_msg("\n");
 	}
+}
+void saveimage(){
+	map<string,dir_node>::iterator it;
+	ofstream image;
+	image.open (imagename);
+	for(it=table.begin();it!=table.end();it++)
+	{	//log_msg(it->first+":"+(it->second).name+":");
+		image << (it->second).name<<endl;
+		image << (it->second).path<<endl;
+		image << to_string((it->second).isFolder)<<endl;
+		image << (it->second).data <<"|"<<endl;
+	}
+}
+void restoreimage(){
+	ifstream image;
+	image.open (imagename);
+	string name, path, data, line;
+	int isFolder;
+	int k=0;
+	while (std::getline(image, line))
+	{	//log_msg(it->first+":"+(it->second).name+":");
+		
+		if(k==0)
+		{	
+			name=line;
+		}
+		if(k==1)
+		{	
+			path=line;
+		}
+		if(k==2)
+		{	
+			isFolder=atoi(line.c_str());
+			
+		}
+		if(k==3){
+			
+			string temp("");
+			temp=line;
+			int found=temp.find("|");
+			if(found==-1)
+			{	
+				k--;
+				data+=temp;
+			}
+			else
+			{
+				if(found!=0)
+					data+=temp.substr(0,found-1);
+				
+			}
+		}
+		k++;
+		
+		if(k==4){
+			k=0;
+			dir_node file;
+			file.path=path;
+			file.isFolder=isFolder;
+			file.name=name;
+			file.data=data;
+			table[path]=file;
+		}
+		
+		
+	}
+	printtable();
+	
 }

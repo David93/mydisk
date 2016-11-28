@@ -100,9 +100,8 @@ int HelloFS::write(const char *path,const char *buf, size_t size, off_t offset,
 	//log_msg("Flags="+to_string(fi->flags & 33792));
 	if(table.count(string(path))==0)
 		return -ENOENT;
-	if(checksize(int(size))==0){
-		return -EDQUOT;
-	}
+	if(checksize(int(size),(fi->flags & O_APPEND)==O_APPEND, table[path].data.length()))
+		return -ENOMEM;
 	if(table.count(string(path))==1)
 	{
 		//log_msg("Running write on "+string(path)+"\n");
@@ -123,6 +122,9 @@ int HelloFS::create(const char *path, mode_t mode, struct fuse_file_info *fi)
 	//addTable(s);
 	string s(path);
 	addTable(s,0);
+	return 0;
+}
+int HelloFS::utime (const char *path, struct utimbuf *time){
 	return 0;
 }
 int HelloFS::unlink (const char *path){
@@ -148,5 +150,6 @@ int HelloFS::rmdir (const char *path){
 	return 0;
 }
 void HelloFS::destroy (void *private_data){
-	log_msg("Bye bye!");
+	saveimage();
+	
 }

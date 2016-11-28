@@ -9,7 +9,5 @@
 Issues: 
 
 1)Writing to an existing file w/o append
-2)opendir?
-3)Postmark giving errors
-4)Persistant
-5)Make it take multiple parametets
+2)Postmark giving errors
+3)Persistant

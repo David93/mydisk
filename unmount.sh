@@ -1,2 +1,2 @@
 #!/bin/bash
-fusermount -u ok
+fusermount -u wow

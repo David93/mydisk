@@ -1,4 +1,4 @@
 #!/bin/bash
-fusermount -u huh
+fusermount -u wow
 make
-./ramdisk huh 512
+./ramdisk wow 512 

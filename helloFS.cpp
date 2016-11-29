@@ -100,10 +100,13 @@ int HelloFS::write(const char *path,const char *buf, size_t size, off_t offset,
 	//log_msg("Flags="+to_string(fi->flags & 33792));
 	if(table.count(string(path))==0)
 		return -ENOENT;
-	if(checksize(int(size),(fi->flags & O_APPEND)==O_APPEND, table[path].data.length()))
+	if(size >=512)
+		if(checksize(int(size),(fi->flags & O_APPEND)==O_APPEND, table[string(path)].data.length())==0)
 		return -ENOMEM;
-	if(size!=string(buf).length())
-		log_msg("LIKE WTF \n");
+	if(size <512)	
+		if(checksize(int(size),(fi->flags & O_APPEND)==O_APPEND, table[string(path)].data.length())==1 )
+			return -ENOMEM;
+	
 	if(table.count(string(path))==1)
 	{
 		//log_msg("Running write on "+string(path)+"\n");
@@ -150,8 +153,4 @@ int HelloFS::rmdir (const char *path){
 	//log_msg("Running rmdir\n");
 	rmfTable(string(path));
 	return 0;
-}
-void HelloFS::destroy (void *private_data){
-	saveimage();
-	
 }

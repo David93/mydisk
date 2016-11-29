@@ -36,7 +36,7 @@ public:
   static int mkdir (const char *path, mode_t mode);
   static int rmdir (const char *path);
   static int opendir (const char *path, struct fuse_file_info *fi);
-  static void destroy (void *private_data);
+  
 };
 
 #endif

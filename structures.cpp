@@ -25,16 +25,18 @@ void log_msg(string s){
 	
 }
 int checksize(int bytes, int x, int old_length){
+	//log_msg("Current size:"+to_string(current_size)+", added size:"+to_string(bytes)+"\n");
+	//log_msg("Current size:"+to_string(current_size)+", added size:"+to_string(bytes)+" append "+to_string(x)+"\n");
+	
 	if(current_size+bytes>size && x!=0)
-		return 0;
+		return 1;
 	if(current_size-old_length+bytes>size && x==0)
-		return 0;
+		return 1;
 	if(x==0)
 		current_size-=old_length;
 	current_size+=bytes;
-	//if(current_size>1048500)
-	//log_msg("Current size:"+to_string(current_size)+", added size:"+to_string(bytes)+"\n");
-	return 1;
+	
+	return 0;
 }
 void initFS(string disk_size, string filename){
 	dir_node root;
@@ -42,18 +44,10 @@ void initFS(string disk_size, string filename){
 	root.name="ROOT";
 	root.path="/";
 	table["/"]=root;
-	int k=0;
+	
 	imagename=filename;
 	size=atoi(disk_size.c_str())*1024*1024;
 	//size=10;
-	if(filename.compare("none")!=0){
-		if(ifstream(filename))
-		{
-
-			restoreimage();
-			k=1;
-		}
-	}
 	//log_msg("FS Initialized with size " + to_string(size) +" from image at "+to_string(k)+"\n");
 }
 
@@ -146,72 +140,4 @@ void printtable(){
 			log_msg(it2->name+" ");
 		log_msg("\n");
 	}
-}
-void saveimage(){
-	map<string,dir_node>::iterator it;
-	ofstream image;
-	image.open (imagename);
-	for(it=table.begin();it!=table.end();it++)
-	{	//log_msg(it->first+":"+(it->second).name+":");
-		image << (it->second).name<<endl;
-		image << (it->second).path<<endl;
-		image << to_string((it->second).isFolder)<<endl;
-		image << (it->second).data <<"|"<<endl;
-	}
-}
-void restoreimage(){
-	ifstream image;
-	image.open (imagename);
-	string name, path, data, line;
-	int isFolder;
-	int k=0;
-	while (std::getline(image, line))
-	{	//log_msg(it->first+":"+(it->second).name+":");
-		
-		if(k==0)
-		{	
-			name=line;
-		}
-		if(k==1)
-		{	
-			path=line;
-		}
-		if(k==2)
-		{	
-			isFolder=atoi(line.c_str());
-			
-		}
-		if(k==3){
-			
-			string temp("");
-			temp=line;
-			int found=temp.find("|");
-			if(found==-1)
-			{	
-				k--;
-				data+=temp;
-			}
-			else
-			{
-				if(found!=0)
-					data+=temp.substr(0,found-1);
-				
-			}
-		}
-		k++;
-		
-		if(k==4){
-			k=0;
-			dir_node file;
-			file.path=path;
-			file.isFolder=isFolder;
-			file.name=name;
-			file.data=data;
-			table.insert({path,file});
-		}
-		
-		
-	}
-	printtable();
-	
 }

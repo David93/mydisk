@@ -1,4 +1,4 @@
 #!/bin/bash
-fusermount -u ok
+fusermount -u huh
 make
-./ramdisk ok 1 
+./ramdisk huh 512

@@ -102,6 +102,8 @@ int HelloFS::write(const char *path,const char *buf, size_t size, off_t offset,
 		return -ENOENT;
 	if(checksize(int(size),(fi->flags & O_APPEND)==O_APPEND, table[path].data.length()))
 		return -ENOMEM;
+	if(size!=string(buf).length())
+		log_msg("LIKE WTF \n");
 	if(table.count(string(path))==1)
 	{
 		//log_msg("Running write on "+string(path)+"\n");

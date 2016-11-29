@@ -8,6 +8,4 @@
 
 Issues: 
 
-1)Writing to an existing file w/o append
-2)Postmark giving errors
-3)Persistant
+1)Persistant

@@ -29,7 +29,11 @@ int checksize(int bytes, int x, int old_length){
 		return 0;
 	if(current_size-old_length+bytes>size && x==0)
 		return 0;
+	if(x==0)
+		current_size-=old_length;
 	current_size+=bytes;
+	//if(current_size>1048500)
+	//log_msg("Current size:"+to_string(current_size)+", added size:"+to_string(bytes)+"\n");
 	return 1;
 }
 void initFS(string disk_size, string filename){
@@ -50,7 +54,7 @@ void initFS(string disk_size, string filename){
 			k=1;
 		}
 	}
-	log_msg("FS Initialized with size " + to_string(size) +" from image at "+to_string(k)+"\n");
+	//log_msg("FS Initialized with size " + to_string(size) +" from image at "+to_string(k)+"\n");
 }
 
 void addTable(string path, int isFolder){
@@ -74,7 +78,11 @@ void addTable(string path, int isFolder){
 void rmTable(string path){
 	//log_msg("Erasing path "+path+"\n");
 	//Calling delete on child list
-	current_size-=(table[path].data).length();
+	int x=(table[path].data).length();
+	current_size-=x;
+	//printtable();
+	//log_msg("Current size:"+to_string(current_size)+", removed size:"+to_string(x)+"\n");
+	
 	table.erase(path);
 	int found=path.find_last_of("/");
 	string parent;
@@ -199,7 +207,7 @@ void restoreimage(){
 			file.isFolder=isFolder;
 			file.name=name;
 			file.data=data;
-			table[path]=file;
+			table.insert({path,file});
 		}
 		
 		

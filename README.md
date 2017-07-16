@@ -1,3 +1,3 @@
 Initial commit
 
-0.01 Did some bullshit scripting
+Final release in try_r branch
